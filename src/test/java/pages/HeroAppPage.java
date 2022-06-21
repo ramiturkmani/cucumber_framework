@@ -44,5 +44,17 @@ public class HeroAppPage {
     @FindBy(css = "#hot-spot")
     public WebElement rectangleBox;
 
+    @FindBy(id = "username")
+    public WebElement usernameInputBox;
+
+    @FindBy(id = "password")
+    public WebElement passwordInputBox;
+
+    @FindBy(className = "radius")
+    public WebElement loginButton;
+
+    @FindBy(id = "flash-messages")
+    public WebElement loginErrorMessage;
+
 
 }

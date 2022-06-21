@@ -1,9 +1,9 @@
 package steps;
 
-import cucumber.api.java.Before;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NotFoundException;
@@ -70,6 +70,9 @@ public class HeroAppSteps {
             case "Delete":
                 heroAppPage.deleteButton.click();
                 break;
+            case "Login":
+                heroAppPage.loginButton.click();
+                break;
             default:
                 throw new NotFoundException("The button name is not defined properly in the feature file!!!");
         }
@@ -122,5 +125,21 @@ public class HeroAppSteps {
     public void userShouldSeeAPopupDisplayingMessage(String alertText) {
         Assert.assertEquals(alertText, AlertHandler.getAlertsText(driver));
         AlertHandler.dismissAlert(driver);
+    }
+
+    @When("user enters username as {string} and password as {string}")
+    public void user_enters_username_as_and_password_as(String username, String password) {
+        heroAppPage.usernameInputBox.sendKeys(username);
+        heroAppPage.passwordInputBox.sendKeys(password);
+    }
+
+    @Then("user should see a message starts with {string}")
+    public void user_should_see_a_message_starts_with(String errorMessage) {
+        Assert.assertTrue(heroAppPage.loginErrorMessage.getText().startsWith(errorMessage));
+    }
+
+    @Then("user should see {string} big heading")
+    public void userShouldSeeBigHeading(String arg0) {
+
     }
 }
