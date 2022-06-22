@@ -1,4 +1,4 @@
-@Google
+@Regression
   #Each feature file must have a feature name
 Feature: Google Search Functionality
 

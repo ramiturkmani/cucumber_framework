@@ -1,17 +1,20 @@
 package runners;
 
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = "steps",
-        tags = "@Wiki",
+        tags = "@Smoke",
         dryRun = false,
         monochrome = false,
-        plugin = "html:target/cucumber-reports"
+        plugin = {"html:target/cucumber-reports",
+                "json:target/cucumber-reports/Cucumber.json",
+                "pretty"
+        }
 )
 
 public class Runner {

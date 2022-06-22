@@ -21,7 +21,3 @@ Feature: HeroApp Functionalities
     And user should see a rectangle box to right click
     When user right clicks on rectangle box
     Then user should see a popup displaying message "You selected a context menu"
-
-  Scenario: Validate data tables element page
-    When user clicks on "Sortable Data Tables" link
-    Then user should see "Data Tables" big heading

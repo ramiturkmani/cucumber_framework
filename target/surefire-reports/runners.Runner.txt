@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: runners.Runner
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 23.94 s <<< FAILURE! - in runners.Runner
+Validate form authentication page(Hero App Login Functionality)  Time elapsed: 4.238 s  <<< FAILURE!
+java.lang.AssertionError
+
+Validate form authentication page(Hero App Login Functionality)  Time elapsed: 4.467 s  <<< FAILURE!
+java.lang.AssertionError
+

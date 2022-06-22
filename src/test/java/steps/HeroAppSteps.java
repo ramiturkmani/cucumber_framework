@@ -1,9 +1,9 @@
 package steps;
 
-import io.cucumber.java.Before;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NotFoundException;
@@ -12,6 +12,7 @@ import pages.HeroAppPage;
 import utils.ActionsUtil;
 import utils.AlertHandler;
 import utils.Driver;
+import utils.Waiter;
 
 public class HeroAppSteps {
 
@@ -19,7 +20,7 @@ public class HeroAppSteps {
     HeroAppPage heroAppPage;
 
     @Before
-    public void setup(){
+    public void setup() {
         driver = Driver.getDriver();
         heroAppPage = new HeroAppPage();
     }
@@ -27,6 +28,7 @@ public class HeroAppSteps {
     @When("user clicks on {string} link")
     public void userClicksOnLink(String linkText) {
         heroAppPage.clickOnLink(linkText);
+        Waiter.pause(5);
     }
 
     @Then("user should see {string} heading")
@@ -41,23 +43,26 @@ public class HeroAppSteps {
                 Assert.assertEquals(headingText, heroAppPage.contextMenuHeading3.getText());
                 break;
             default:
-                throw new NotFoundException("The button name is not defined properly in the feature file!!!");
+                throw new NotFoundException("The heading text is not defined properly in the feature file!!!");
+
         }
     }
 
     @And("user should see {string} button")
     public void userShouldSeeButton(String buttonText) {
-        switch (buttonText){
+        switch (buttonText) {
             case "Add Element":
                 Assert.assertTrue(heroAppPage.addElementButton.isDisplayed());
+                Assert.assertTrue(heroAppPage.addElementButton.isEnabled());
                 Assert.assertEquals(buttonText, heroAppPage.addElementButton.getText());
                 break;
             case "Delete":
                 Assert.assertTrue(heroAppPage.deleteButton.isDisplayed());
+                Assert.assertTrue(heroAppPage.deleteButton.isEnabled());
                 Assert.assertEquals(buttonText, heroAppPage.deleteButton.getText());
                 break;
             default:
-                throw new NotFoundException("The button name is not defined properly in the feature file!!!");
+                throw new NotFoundException("The button text is not defined properly in the feature file!!!");
         }
     }
 
@@ -74,7 +79,7 @@ public class HeroAppSteps {
                 heroAppPage.loginButton.click();
                 break;
             default:
-                throw new NotFoundException("The button name is not defined properly in the feature file!!!");
+                throw new NotFoundException("The button text is not defined properly in the feature file!!!");
         }
     }
 
@@ -91,23 +96,23 @@ public class HeroAppSteps {
                 }
                 break;
             default:
-                throw new NotFoundException("The button name is not defined properly in the feature file!!!");
+                throw new NotFoundException("The button text is not defined properly in the feature file!!!");
         }
     }
 
     @And("user should see {string} text")
-    public void userShouldSeeText(String text) {
-        switch (text){
+    public void userShouldSeeText(String paragraphText) {
+        switch (paragraphText){
             case "Context menu items are custom additions that appear in the right-click menu.":
                 Assert.assertTrue(heroAppPage.contextMenuParagraph1.isDisplayed());
-                Assert.assertEquals(text, heroAppPage.contextMenuParagraph1.getText());
+                Assert.assertEquals(paragraphText, heroAppPage.contextMenuParagraph1.getText());
                 break;
             case "Right-click in the box below to see one called 'the-internet'. When you click it, it will trigger a JavaScript alert.":
                 Assert.assertTrue(heroAppPage.contextMenuParagraph2.isDisplayed());
-                Assert.assertEquals(text, heroAppPage.contextMenuParagraph2.getText());
+                Assert.assertEquals(paragraphText, heroAppPage.contextMenuParagraph2.getText());
                 break;
             default:
-                throw new NotFoundException("The text is not defined properly in the feature file!!!");
+                throw new NotFoundException("The paragraph text is not defined properly in the feature file!!!");
         }
     }
 
@@ -119,6 +124,7 @@ public class HeroAppSteps {
     @When("user right clicks on rectangle box")
     public void userRightClicksOnRectangleBox() {
         ActionsUtil.rightClick(heroAppPage.rectangleBox);
+        Waiter.pause(5);
     }
 
     @Then("user should see a popup displaying message {string}")
@@ -127,19 +133,14 @@ public class HeroAppSteps {
         AlertHandler.dismissAlert(driver);
     }
 
-    @When("user enters username as {string} and password as {string}")
-    public void user_enters_username_as_and_password_as(String username, String password) {
+    @And("user enters username as {string} and password as {string}")
+    public void userEntersUsernameAsAndPasswordAs(String username, String password) {
         heroAppPage.usernameInputBox.sendKeys(username);
         heroAppPage.passwordInputBox.sendKeys(password);
     }
 
     @Then("user should see a message starts with {string}")
-    public void user_should_see_a_message_starts_with(String errorMessage) {
+    public void userShouldSeeAMessageStartsWith(String errorMessage) {
         Assert.assertTrue(heroAppPage.loginErrorMessage.getText().startsWith(errorMessage));
-    }
-
-    @Then("user should see {string} big heading")
-    public void userShouldSeeBigHeading(String arg0) {
-
     }
 }
