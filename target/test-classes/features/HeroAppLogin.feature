@@ -1,4 +1,4 @@
-@Login @Smoke
+@Smoke
 Feature: Hero App Login Functionality
 
   Background:
@@ -13,6 +13,6 @@ Feature: Hero App Login Functionality
       | username | password             | message                        |
       |          |                      | Your username is invalid!      |
       | johndoe  | abcd1234             | Your username is invalid!      |
-      | tomsmith | 12345                | Your username is invalid!      |
-      | tomsmith | SuperSecretPassword! | Your username is invalid!      |
+      | tomsmith | 12345                | Your password is invalid!      |
+      | tomsmith | SuperSecretPassword  | Your password is invalid!      |
       | tomsmith | SuperSecretPassword! | You logged into a secure area! |

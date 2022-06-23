@@ -1,6 +1,6 @@
+@Regression
 Feature: Wiki Search Functionality
 
-  @Wiki
   Scenario Outline: Validate Wiki search
     Given user navigates to "https://www.wikipedia.org/"
     When user searches for "<key>" on Wikipedia
@@ -22,4 +22,8 @@ Feature: Wiki Search Functionality
 #      | Irina Shayk      |
 #      | Kobe Bryant      |
 #      | Piero Manzoni    |
-  
+
+  Scenario: Validate Wikipedia main languages
+    Given user navigates to "https://www.wikipedia.org/"
+    Then user should see below languages around the logo
+      | English | 日本語 | Español | Русский | Deutsch | Français | Italiano | 中文 | Português | Polski |
